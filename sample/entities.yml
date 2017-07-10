@@ -1,0 +1,37 @@
+tenants:
+  Joe:
+    paging_exception:
+      action: null
+      message: $tenant is on vacation
+    synonyms:
+    - Joseph
+    - Jojo
+    unit: '500'
+    password: forthright
+  Mary:
+    synonyms:
+    - Marie
+    - Mama
+    unit: A540
+    phone_no: '+14155555555'
+units:
+  '500':
+    floor: 5
+    synonyms:
+    - '500'
+    - 500
+    - five hundred
+    - five oh oh
+    - five zero zero
+  A540:
+    floor: 4
+    paging_exception:
+      action: null
+      message: $unit is unoccupied
+    synonyms:
+    - 'A540'
+    - 'a 5:40'
+    - '8 5:40'
+    - 'a 540'
+    - 'apple 540'
+    - 'apple 5:40'

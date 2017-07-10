@@ -1,0 +1,6 @@
+# Your Account SID from twilio.com/console
+account_sid: "<ACCOUNT SID GOES HERE>"
+# Your Auth Token from twilio.com/console
+auth_token: "<AUTHENTICATION TOKEN GOES HERE>"
+# Your origin phone number
+from: "<+1-XXX-XXX-XXXX>"
