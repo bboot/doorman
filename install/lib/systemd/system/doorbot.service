@@ -1,0 +1,12 @@
+[Unit]
+Description=Door Answering and Dispatching Robot
+
+[Service]
+ExecStart=/home/pi/bin/startup.sh
+StandardOutput=null
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+Alias=doorbot.service
