@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Janus WebRTC Gateway: Video Room Demo</title>
+<script type="text/javascript" src="jquery.min.js" ></script>
+<script type="text/javascript" src="jquery.blockUI.js" ></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootbox.min.js"></script>
+<script type="text/javascript" src="js/spin.min.js"></script>
+<script type="text/javascript" src="janus.js" ></script>
+<script type="text/javascript" src="videoroomtest.js"></script>
+<link rel="stylesheet" href="css/cerulean/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="css/demo.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.css"/>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+			</div>
+			<div class="container" id="videojoin">
+				<div class="row">
+					<span class="label label-info" id="you"></span>
+					<div class="col-md-12" id="controls">
+						<ul>
+						<div style="text-align: center;" class="input-group margin-bottom-md" id="registernowrpi">
+							<!--span class="input-group-addon">@</span-->
+							<input type=hidden autocomplete="off" class="form-control" autocomplete="off" type="text" readonly=true value="DOOR" id="usernamerpi" onkeypress="return checkEnterRpi(this, event);"></input>
+							<span class="input-group-btn">
+								<!--button class="btn btn-success" autocomplete="off" id="startrpi">Start</button-->
+								<button class="btn btn-danger" autocomplete="off" id="stoprpi">Ignore Caller</button>
+							</span>
+						</div>
+						<div style="text-align: center;" class="input-group margin-bottom-md hide" id="registernow">
+							<!--span class="input-group-addon">@</span-->
+							<input type=hidden autocomplete="off" class="form-control" autocomplete="off" type="text" readonly=true value="453" id="username" onkeypress="return checkEnter(this, event);"></input>
+							<span class="input-group-btn">
+								<button class="btn btn-success" autocomplete="off" id="register">Start Comm</button>
+							</span>
+						</div>
+						</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="container hide" id="videos">
+				<div class="row">
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Remote Video #1 <span class="label label-info hide" id="remote1"></span></h3>
+							</div>
+							<div class="panel-body relative" id="videoremote1"></div>
+						</div>
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+	<!--div class="footer"-->
+	</div>
+</div>
+
+</body>
+</html>
