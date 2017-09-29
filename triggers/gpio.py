@@ -51,10 +51,6 @@ class GpioTrigger(Trigger):
     def debounce(self, _):
         """Check that the input holds the expected value for the debounce period,
         to avoid false trigger on short pulses."""
-        # @bryan TEMP - until capacitors arrive, try 0.1 uF
-        self.callback()
-        return
-        # TEMP end
         start = time.time()
         while time.time() < start + self.DEBOUNCE_TIME:
             if GPIO.input(self.channel) != self.expected_value:

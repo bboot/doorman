@@ -31,7 +31,7 @@ from google.assistant.embedded.v1alpha1 import embedded_assistant_pb2
 import grpc
 from six.moves import queue
 
-import i18n
+import aiy.i18n
 
 logger = logging.getLogger('speech')
 
@@ -82,6 +82,7 @@ class GenericSpeechRequest(object):
     DEADLINE_SECS = 185
 
     def __init__(self, api_host, credentials):
+        self.dialog_follow_on = False
         self._audio_queue = queue.Queue()
         self._phrases = []
         self._channel_factory = _ChannelFactory(api_host, credentials)
@@ -114,6 +115,8 @@ class GenericSpeechRequest(object):
                 self._audio_queue.get(False)
             except queue.Empty:
                 return
+
+        self.dialog_follow_on = False
 
     def add_data(self, data):
         self._audio_queue.put(data)
@@ -277,7 +280,7 @@ class CloudSpeechRequest(GenericSpeechRequest):
 
         super().__init__('speech.googleapis.com', credentials)
 
-        self.language_code = i18n.get_language_code()
+        self.language_code = aiy.i18n.get_language_code()
 
         if not hasattr(cloud_speech, 'StreamingRecognizeRequest'):
             raise ValueError("cloud_speech_pb2.py doesn't have StreamingRecognizeRequest.")
@@ -347,6 +350,7 @@ class AssistantSpeechRequest(GenericSpeechRequest):
 
         super().__init__('embeddedassistant.googleapis.com', credentials)
 
+        self._conversation_state = None
         self._response_audio = b''
         self._transcript = None
 
@@ -368,9 +372,13 @@ class AssistantSpeechRequest(GenericSpeechRequest):
             sample_rate_hertz=AUDIO_SAMPLE_RATE_HZ,
             volume_percentage=50,
         )
+        converse_state = embedded_assistant_pb2.ConverseState(
+            conversation_state=self._conversation_state,
+        )
         converse_config = embedded_assistant_pb2.ConverseConfig(
             audio_in_config=audio_in_config,
             audio_out_config=audio_out_config,
+            converse_state=converse_state,
         )
 
         return embedded_assistant_pb2.ConverseRequest(config=converse_config)
@@ -398,6 +406,14 @@ class AssistantSpeechRequest(GenericSpeechRequest):
             self._transcript = resp.result.spoken_request_text
 
         self._response_audio += resp.audio_out.audio_data
+
+        if resp.result.conversation_state:
+            self._conversation_state = resp.result.conversation_state
+
+        if resp.result.microphone_mode:
+            self.dialog_follow_on = (
+                resp.result.microphone_mode ==
+                embedded_assistant_pb2.ConverseResult.DIALOG_FOLLOW_ON)
 
     def _finish_request(self):
         super()._finish_request()

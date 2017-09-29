@@ -30,7 +30,7 @@ What this solution provides:
 5. Wifi - no wiring required except for 12v DC power
 6. Each building unit is equipped with a wireless panel
 7. Scalable - no fixed limit on the number of tenants or units
-8. Single-use verbal passwords for keyless entry
+8. Single-use verbal passwords provide keyless entry
 
 
 Implementation:
@@ -51,5 +51,3 @@ all.  The technology should not even be visible.
 4. Visitor-facing panel for tenant-lookup, maps, announcements, etc.
 5. Tenant/unit management app
 6. AirBnb integration
-7. Battery and solar powered
-8. Real estate "smart" lock-boxes
